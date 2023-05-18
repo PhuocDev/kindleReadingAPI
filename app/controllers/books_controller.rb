@@ -36,6 +36,7 @@ class BooksController < ApplicationController
   # DELETE /books/1
   def destroy
     @book.destroy
+    render json: 'Deleted book successfully'
   end
 
   private
@@ -46,6 +47,6 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:name, :author)
+      params.require(:book).permit(:name, :author, :title, :description, :price, :fileURL)
     end
 end
