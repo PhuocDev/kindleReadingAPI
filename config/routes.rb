@@ -14,4 +14,6 @@ Rails.application.routes.draw do
 
   resources :collections
   get 'collection/:collection_id/books', to: 'collections#show_collection_books'
+
+  get 'books/:book_id/bookmarks/latest', to: 'bookmarks#latest'
 end

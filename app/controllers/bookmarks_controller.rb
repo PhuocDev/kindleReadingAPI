@@ -1,6 +1,13 @@
 class BookmarksController < ApplicationController
   before_action :set_bookmark, only: %i[ show update destroy ]
 
+  # Get the latest bookmark
+  def latest
+    book = Book.find(params[:book_id]) # Assuming book_id is the ID of the book
+    @latest_bookmark = Bookmark.where(user: current_user, book: book).order(created_at: :desc).first
+    # @bookmark = current_user.bookmarks.order(created_at: :desc).first
+    render json: @latest_bookmark
+  end
   # GET /bookmarks
   def index
     @bookmarks = current_user.bookmarks
