@@ -8,4 +8,5 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: true
 
   has_many :collections
+  has_many :books, through: :collections
 end

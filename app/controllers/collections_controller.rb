@@ -1,10 +1,15 @@
 class CollectionsController < ApplicationController
   before_action :set_collection, only: %i[ show update destroy ]
 
+
+  def show_collection_books
+    @collection = current_user.collections.find(params[:collection_id])
+    render json: @collection.books
+  end
   # GET /collections
   def index
-    @collections = Collection.all
-
+    # @collections = Collection.all
+    @collections = current_user.collections
     render json: @collections
   end
 
@@ -41,11 +46,11 @@ class CollectionsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_collection
-      @collection = Collection.find(params[:id])
+      @collection = current_user.collections.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def collection_params
-      params.require(:collection).permit(:name, :user_id)
+      params.require(:collection).permit(:name, :collection_id)
     end
 end

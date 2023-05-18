@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_18_075748) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_18_094612) do
   create_table "books", force: :cascade do |t|
     t.string "name"
     t.string "author"
@@ -20,6 +20,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_18_075748) do
     t.text "description"
     t.decimal "price"
     t.string "fileURL"
+  end
+
+  create_table "books_collections", force: :cascade do |t|
+    t.integer "book_id", null: false
+    t.integer "collection_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_books_collections_on_book_id"
+    t.index ["collection_id"], name: "index_books_collections_on_collection_id"
   end
 
   create_table "collections", force: :cascade do |t|
@@ -37,5 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_18_075748) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "books_collections", "books"
+  add_foreign_key "books_collections", "collections"
   add_foreign_key "collections", "users"
 end
