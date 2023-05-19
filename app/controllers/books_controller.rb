@@ -10,7 +10,13 @@ class BooksController < ApplicationController
 
   # GET /books/1
   def show
+    # @book.update(active: true) if @book.active == false
+    if @book.collections.exists?(user_id: current_user.id)
+      # Set thuộc tính active của quyển sách thành true
+      @book.update(active: true)
+    end
     render json: @book
+
   end
 
   # POST /books
