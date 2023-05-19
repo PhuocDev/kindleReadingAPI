@@ -13,6 +13,22 @@ class BooksCollectionsController < ApplicationController
     render json: @books_collection
   end
 
+  def create
+    collection = Collection.find(params[:collection_id])
+    book = Book.find(params[:book_id])
+
+    # Kiểm tra xem quyển sách đã tồn tại trong collection chưa
+    if BooksCollection.exists?(book: book, collection: collection)
+      render json: { error: "The book already exists in the collection." }, status: :unprocessable_entity
+    else
+      books_collection = BooksCollection.new(book: book, collection: collection, user: current_user)
+      if books_collection.save
+        render json: books_collection, status: :created
+      else
+        render json: { error: books_collection.errors.full_messages }, status: :unprocessable_entity
+      end
+    end
+  end
   # POST /books_collections
   def create
     @books_collection = BooksCollection.new(books_collection_params)

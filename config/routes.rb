@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   get 'collection/:collection_id/books', to: 'collections#show_collection_books'
 
   get 'books/:book_id/bookmarks/latest', to: 'bookmarks#latest'
+  post 'collections/:collection_id/books/:book_id', to: 'books_collections#create'
 end

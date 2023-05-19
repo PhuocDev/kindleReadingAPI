@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_18_222437) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_19_145442) do
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "book_id", null: false
@@ -31,6 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_18_222437) do
     t.text "description"
     t.decimal "price"
     t.string "fileURL"
+    t.boolean "active", default: false
   end
 
   create_table "books_collections", force: :cascade do |t|
