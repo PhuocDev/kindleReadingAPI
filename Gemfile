@@ -14,6 +14,7 @@ gem "puma", "~> 5.0"
 gem 'bcrypt', '~> 3.1.7'
 gem 'jwt', '~> 2.2'
 gem 'uuid', '~> 2.3'
+gem 'wicked_pdf'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 
