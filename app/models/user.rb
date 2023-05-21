@@ -10,4 +10,5 @@ class User < ApplicationRecord
   has_many :collections
   has_many :books, through: :collections
   has_many :bookmarks
+  has_many :highlights
 end
