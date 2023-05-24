@@ -1,6 +1,20 @@
 class BooksController < ApplicationController
   before_action :set_book, only: %i[ show update destroy ]
 
+
+  # Get the latest bookmark
+  def latest
+    book = Book.find(params[:id]) # Assuming book_id is the ID of the book
+    @latest_bookmark = Bookmark.where(user: current_user, book: book).order(created_at: :desc).first
+    # @bookmark = current_user.bookmarks.order(created_at: :desc).first
+    render json: @latest_bookmark
+  end
+
+  def all_highlights
+    book = current_user.books.find(params[:id])
+    highlights = book.highlights
+    render json: highlights
+  end
   # Export to pdf
   def export_pdf
     book = Book.find(params[:id])
@@ -33,7 +47,7 @@ class BooksController < ApplicationController
   def deactive
     # if @book.collections.exists?(user_id: current_user.id)
       # Set thuộc tính active của quyển sách thành true
-    @book = current_user.books.find(params[:book_id])
+    @book = current_user.books.find(params[:id])
     if (@book)
       @book.update(active: false)
       render json: @book

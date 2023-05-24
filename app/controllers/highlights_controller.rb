@@ -7,11 +7,12 @@ class HighlightsController < ApplicationController
     render json: @highlights
   end
 
-  def index_of_book
-    book = current_user.books.find(params[:book_id])
-    highlights = book.highlights
-    render json: highlights
-  end
+  # #moved to book_controller
+  # def index_of_book
+  #   book = current_user.books.find(params[:book_id])
+  #   highlights = book.highlights
+  #   render json: highlights
+  # end
   # GET /highlights/1
   def show
     render json: @highlight

@@ -3,7 +3,7 @@ class CollectionsController < ApplicationController
 
 
   def show_collection_books
-    @collection = current_user.collections.find(params[:collection_id])
+    @collection = current_user.collections.find(params[:id])
     render json: @collection.books
   end
   # GET /collections
