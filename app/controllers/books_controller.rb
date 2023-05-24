@@ -30,6 +30,18 @@ class BooksController < ApplicationController
 
   end
 
+  def deactive
+    # if @book.collections.exists?(user_id: current_user.id)
+      # Set thuộc tính active của quyển sách thành true
+    @book = current_user.books.find(params[:book_id])
+    if (@book)
+      @book.update(active: false)
+      render json: @book
+    else
+      render json: @book.errors, status: :unprocessable_entity
+    end
+  end
+
   # POST /books
   def create
     @book = Book.new(book_params)
@@ -74,6 +86,6 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:name, :author, :title, :description, :price, :fileURL)
+      params.require(:book).permit(:name, :author, :title, :description, :price, :fileURL, :content)
     end
 end

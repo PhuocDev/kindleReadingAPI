@@ -23,6 +23,16 @@ class BookmarksController < ApplicationController
   def create
     @bookmark = Bookmark.new(bookmark_params)
     @bookmark.user = current_user
+    @location = Location.find_or_initialize_by(page: location_params[:page], x: location_params[:x], y: location_params[:y],
+      width: location_params[:width], height: location_params[:height])
+    # @location.save
+    # # Lưu location nếu chưa tồn tại
+    if @location.new_record?
+      @location.save
+    end
+
+    # Gán location_id cho highlight
+    @bookmark.location_id = @location.id
     if @bookmark.save
       render json: @bookmark, status: :created, location: @bookmark
     else
@@ -53,5 +63,8 @@ class BookmarksController < ApplicationController
     # Only allow a list of trusted parameters through.
     def bookmark_params
       params.require(:bookmark).permit( :book_id, :location_id)
+    end
+    def location_params
+      params.require(:location).permit(:page, :x, :y, :width, :height)
     end
 end

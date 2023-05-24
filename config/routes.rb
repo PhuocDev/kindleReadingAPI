@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get 'books/:book_id/bookmarks/latest', to: 'bookmarks#latest'
   #export a book to pdf
   get 'books/:id/export_pdf', to: 'books#export_pdf'
-
+  get 'books/:book_id/deactive', to: 'books#deactive'
   #get all highlights of a book
   get 'books/:book_id/highlights', to: 'highlights#index_of_book'
 
@@ -22,9 +22,6 @@ Rails.application.routes.draw do
   post '/users/signup', to: 'users#create'  # Thêm dòng này để tạo route cho sign up
 
   resources :collections do
-    member do
-
-    end
   end
   get 'collection/:collection_id/books', to: 'collections#show_collection_books'
   #add new book to a collection
