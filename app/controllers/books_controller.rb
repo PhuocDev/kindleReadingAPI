@@ -59,7 +59,8 @@ class BooksController < ApplicationController
   # POST /books
   def create
     @book = Book.new(book_params)
-
+    book_service = BookService.new(@book)
+    book_service.remove_nil
     if @book.save
       render json: @book, status: :created, location: @book
     else
