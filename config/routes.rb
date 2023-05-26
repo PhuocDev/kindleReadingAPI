@@ -21,11 +21,13 @@ Rails.application.routes.draw do
 
   resources :collections do
     member do
+      #collections/:id/books
       get 'books', to: 'collections#show_collection_books'
-      post 'books/:book_id', to: 'books_collections#create'
+      # đang trong collections thì nên dẫn đến mothod trong collections
+      post 'books/:book_id', to: 'collections#add_new_book_to_a_collection'
     end
   end
-
+  # get '/'
     # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

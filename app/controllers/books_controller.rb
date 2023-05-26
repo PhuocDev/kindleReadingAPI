@@ -87,7 +87,7 @@ class BooksController < ApplicationController
 
     def generate_pdf_content(book)
       # Tạo nội dung PDF từ dữ liệu quyển sách, ví dụ:
-      content = "Name of the book: #{book.title}\n"
+      content = "Name of the book: #{book.name}\n"
       content += "Author: #{book.author}\n"
       content += "Content: #{book.content}\n"
       # Thêm các thông tin khác của quyển sách
