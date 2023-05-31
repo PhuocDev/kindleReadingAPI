@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_24_174835) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_31_080727) do
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "book_id", null: false
@@ -34,7 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_174835) do
     t.string "fileURL"
     t.integer "stock"
     t.string "audioURL"
-    t.string "book_type"
+    t.string "type"
   end
 
   create_table "books_collections", force: :cascade do |t|
